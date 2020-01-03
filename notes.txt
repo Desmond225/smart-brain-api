@@ -1,0 +1,7 @@
+list of errors:
+- when logging in with wrong credentials, these get set on the url as headers 
+and redirects to '/' showing the db
+- when registering duplicate user, i log in and get undefined as user
+- when going to '/', I sometimes see the db instead of homescreen
+- when signing in with proper credentials, nothing happens
+- in postman everything works fine
