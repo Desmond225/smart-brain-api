@@ -9,48 +9,20 @@ const signIn = require('./controllers/signin');
 const profile = require('./controllers/profile.js');
 const image = require('./controllers/image.js');
 
+
+
+const db = knex ({
+client: 'pg',
+connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+}
+});
+
 const app = express();
 
-app.use(bodyParser.json());
 app.use(cors());
-
- const db = knex ({
-    client: 'pg',
-    connection: {
-      connectionString : process.env.DATABASE_URL,
-      ssl: true
-    }
-  });
-
-  console.log(db.select('*').from('users').then(data => console.log(data)));
-
-const database = {
-    users: [
-        {
-            id: '123',
-            name: 'Desmond',
-            password: 'root',
-            email: 'desmond@codestackers.io',
-            entries: 0,
-            joined: new Date()
-        },
-        {
-            id: '124',
-            name: 'Desmond2',
-            password: 'root2',
-            email: 'info@codestackers.io',
-            entries: 0,
-            joined: new Date()
-        }
-    ],
-    login: [
-        {
-            id: '987',
-            has: '',
-            email: 'desmond@codestackers.io'
-        }
-    ]
-}
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {res.send('it is working!')});
 app.post('/signin', signIn.handleSignIn(db, bcrypt));
