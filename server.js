@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const morgan = require('morgan');
 
 const register = require('./controllers/register');
 const signIn = require('./controllers/signin');
@@ -11,16 +12,21 @@ const image = require('./controllers/image.js');
 
 
 
+// const db = knex ({
+// client: 'pg',
+// connection: {
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: true
+// }
+// });
+
 const db = knex ({
-client: 'pg',
-connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-}
-});
+    client: 'pg',
+    connection: process.env.POSTGRES_URI
+    });
 
 const app = express();
-
+app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
 

@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+    #backend api
+    smart-brain-api:
+        container_name: backend
+        build: ./
+        command: npm start
+        working_dir: /Users/Desmond/Sites/smart-brain-api
+        environment:
+            POSTGRES_URI: postgres://des:test@postgres:5432/smart-brain-docker
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/Users/Desmond/Sites/smart-brain-api
+    
+    #postgres
+    postgres:
+        environment:
+            POSTGRES_USER: des
+            POSTGRES_PASSWORD: test
+            POSTGRES_DB: smart-brain-docker
+            POSTGRES_HOST: postgres
+        build: ./postgres
+        ports:
+            - "5433:5432"
