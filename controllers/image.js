@@ -1,6 +1,5 @@
 const Clarifai = require('clarifai');
 
-
 const app = new Clarifai.App({
     apiKey: process.env.API_CLARIFAI || 'd505dd7e86464d1da1865f5017f2e742'
     //dangerous: remove api key when done with docker testing!!
